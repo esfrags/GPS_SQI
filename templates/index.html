@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>GPS Analyzer</title>
+</head>
+<body>
+  <h1>GPS Accuracy Analyzer</h1>
+  <form method="post" enctype="multipart/form-data">
+    <input type="file" name="gpxfile">
+    <input type="submit" value="Upload and Analyze">
+  </form>
+
+  {% if results %}
+    <h2>Results</h2>
+    <p>Total points: {{ results.num_points }}</p>
+    <p>Detected spikes: {{ results.num_spikes }}</p>
+    <ul>
+      {% for pt in results.spike_points %}
+        <li>Lat: {{ pt.lat }}, Lon: {{ pt.lon }}, Speed: {{ pt.speed_mps|round(2) }} m/s</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+</body>
+</html>
